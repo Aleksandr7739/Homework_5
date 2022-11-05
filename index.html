@@ -85,7 +85,7 @@
             border-radius: 50%;
             position: relative;
             top: 70px;
-            left: 30px;
+            left: 55px;
         }
 
         .push_2 {
@@ -97,7 +97,7 @@
             border-radius: 50%;
             position: relative;
             top: 70px;
-            left: 130px;
+            left: 55px;
         }
 
         .press_but {
@@ -122,8 +122,12 @@
         </div>
         <div id="screen" class="display">
             <div id="timeShow" class="timer"></div>
-            <button id="but1" class="push_1">Reset</button>
+            <button id="but1" class="push_1">Stop</button>
             <button id="but2" class="push_2">Start</button>
+            <button id="but3" class="push_2">Reset</button>
+        </div>
+        <div>
+
         </div>
         <button id="but" class="press_but"></button>
     </div>
@@ -132,76 +136,49 @@
 
 
 
-
-
-        // let count = 0;
-        // function startTimer() {
-        //     document.getElementById("but2").onclick = () => {
-        //         count = count + 1;
-        //         document.getElementById('seconds').innerHTML = count;
-        //         setTimeout(startTimer, 1000);
-        //     }
-        // }
-
-        // startTimer();
-
-        // let count = 0;
-        // let minutes = 0;
-        // let seconds = 0;
-        // let milliseconds = 0;
-
-        function startTimer() {
-            if (count === 60) {
-                count = 0
-                seconds = seconds + 1;
-            }
-            if (count == 60) {
-                count = 0;
-                minutes = minutes + 1;
-            }
-            // count = count + 1
-            document.getElementById('timeShow').innerHTML = seconds + ':' + minutes + ':' + count
-        }
-
-        let timer = setInterval(startTimer, 10)
-
-        setTimeout(function () {
-            clearInterval(timer);
-            console.log('stop')
-        }, 1000)
-
-        let count = 0;
-        let minutes = 0;
+        let miliSeconds = 0;
         let seconds = 0;
-        let milliseconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
         function startTime() {
 
-            if (count === 60) {
-                count = 0;
+            if (miliSeconds === 60) {
+                miliSeconds = 0;
                 seconds = seconds + 1
             }
-            if (count === 60) {
-                count = 0;
+            if (seconds === 60) {
+                seconds = 0;
                 minutes = minutes + 1;
             }
-            count = count + 1;
+            if (minutes === 60) {
+                minutes = 0;
+                hours = hours + 1;
+            }
+            miliSeconds = miliSeconds + 1;
 
-            // count = count + 1
-            document.getElementById('timeShow').innerHTML = seconds + ':' + minutes + ':' + count
+            // miliSeconds = miliSeconds + 1
+            // document.getElementById('timeShow').innerHTML = hours + ':' + minutes + ':' + seconds + '<span style="font-size: 10px">' + miliSeconds + '</span>'
+            document.getElementById('timeShow').innerHTML = `${hours}:${minutes}:${seconds} <span style="font-size: 10px">${miliSeconds}</span>`
+
         }
 
-        let interval = setInterval(startTime, 10)
-        // let timerId = setInterval(function () {
+        let interval;
 
-        // }, 1000)
 
         document.getElementById('but2').onclick = () => {
-            setInterval(startTime, 10)
+            interval = setInterval(startTime, 10)
         }
-
 
         document.getElementById('but1').onclick = () => {
             clearInterval(interval)
+        }
+
+        document.getElementById('but3').onclick = () => {
+            miliSeconds = 0;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
         }
 
 
